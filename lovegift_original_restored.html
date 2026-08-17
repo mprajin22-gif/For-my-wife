@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Love 💗</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: "Georgia", serif;
+    overflow-x: hidden;
+    background: linear-gradient(135deg, #ffc1dc, #b9d9ff, #ffd6eb);
+    color: #542044;
+}
+
+/* ---------- FLOATING LILIES ---------- */
+
+.lily {
+    position: fixed;
+    font-size: 35px;
+    opacity: 0.75;
+    pointer-events: none;
+    animation: float 12s linear infinite;
+    z-index: 0;
+}
+
+.lily:nth-child(1) { left: 5%; animation-delay: 0s; }
+.lily:nth-child(2) { left: 20%; animation-delay: 3s; }
+.lily:nth-child(3) { left: 40%; animation-delay: 6s; }
+.lily:nth-child(4) { left: 65%; animation-delay: 2s; }
+.lily:nth-child(5) { left: 85%; animation-delay: 5s; }
+
+@keyframes float {
+    0% {
+        transform: translateY(110vh) rotate(0deg);
+    }
+    50% {
+        transform: translateY(50vh) rotate(180deg);
+    }
+    100% {
+        transform: translateY(-15vh) rotate(360deg);
+    }
+}
+
+/* ---------- GENERAL ---------- */
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    width: min(500px, 95%);
+    padding: 35px;
+    border-radius: 30px;
+    text-align: center;
+    background: rgba(255,255,255,0.65);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 20px 60px rgba(91, 44, 75, 0.25);
+    border: 1px solid rgba(255,255,255,0.7);
+}
+
+h1 {
+    font-size: 2.2rem;
+    margin-bottom: 15px;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+p {
+    line-height: 1.7;
+}
+
+/* ---------- INPUT ---------- */
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin: 20px 0 12px;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    text-align: center;
+    font-size: 1rem;
+    background: rgba(255,255,255,0.9);
+}
+
+button {
+    border: none;
+    padding: 13px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    background: linear-gradient(135deg, #ff6fae, #8bbcff);
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(255,105,160,0.3);
+}
+
+button:hover {
+    transform: translateY(-3px) scale(1.03);
+}
+
+.hint {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 10px;
+}
+
+.error {
+    color: #d43d72;
+    margin-top: 10px;
+    display: none;
+}
+
+/* ---------- SCREENS ---------- */
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* ---------- PUZZLE ---------- */
+
+.letters {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.letter {
+    background: white;
+    padding: 14px 17px;
+    border-radius: 12px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* ---------- LOVE LETTER ---------- */
+
+.letter-box {
+    max-width: 700px;
+    width: 100%;
+    background: #fffafc;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 25px 70px rgba(75,30,60,0.3);
+    text-align: left;
+    position: relative;
+    border: 2px solid #f3c4d8;
+}
+
+.letter-box::before {
+    content: "💌";
+    position: absolute;
+    top: -30px;
+    right: 25px;
+    font-size: 55px;
+}
+
+.letter-box h2 {
+    text-align: center;
+    color: #d94f88;
+}
+
+.letter-text {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    white-space: pre-line;
+}
+
+.signature {
+    text-align: right;
+    margin-top: 25px;
+    font-size: 1.2rem;
+    color: #d94f88;
+}
+
+/* ---------- HEARTS ---------- */
+
+.heart {
+    position: fixed;
+    pointer-events: none;
+    font-size: 25px;
+    animation: heartFloat 3s ease-out forwards;
+    z-index: 10;
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-250px) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media(max-width:600px) {
+    .card {
+        padding: 25px 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .letter-box {
+        padding: 25px 20px;
+    }
+
+    .letter-text {
+        font-size: 0.98rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating lilies -->
+<div class="lily">🌸</div>
+<div class="lily">🌺</div>
+<div class="lily">🌸</div>
+<div class="lily">🌺</div>
+<div class="lily">🌸</div>
+
+
+<!-- ================= PASSWORD ================= -->
+
+<div class="container screen active" id="passwordScreen">
+
+    <div class="card">
+
+        <div style="font-size:60px;">🌸</div>
+
+        <h1>Hey, my love 💗</h1>
+
+        <p>
+            I made something tiny for you...
+            <br>
+            But you're going to have to unlock it first. 👀
+        </p>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Enter the secret password 💌"
+        >
+
+        <button onclick="checkPassword()">
+            Unlock My Heart 💗
+        </button>
+
+        <p class="hint">
+            Hint: The day our story officially began 👀
+        </p>
+
+        <p class="error" id="passwordError">
+            Hmm... that's not it, baby 😭💗
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= PUZZLE ================= -->
+
+<div class="container screen" id="puzzleScreen">
+
+    <div class="card">
+
+        <div style="font-size:55px;">🧩💗</div>
+
+        <h1>One tiny puzzle...</h1>
+
+        <p>
+            Rearrange these letters.
+            <br>
+            The answer describes exactly what I feel for you.
+        </p>
+
+        <div class="letters">
+            <div class="letter">V</div>
+            <div class="letter">E</div>
+            <div class="letter">L</div>
+            <div class="letter">O</div>
+        </div>
+
+        <input
+            type="text"
+            id="puzzleAnswer"
+            placeholder="Your answer..."
+        >
+
+        <button onclick="solvePuzzle()">
+            Unlock the letter 💌
+        </button>
+
+        <p class="error" id="puzzleError">
+            Try again, pretty girl 😭💕
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= LOVE LETTER ================= -->
+
+<div class="container screen" id="letterScreen">
+
+    <div class="letter-box">
+
+        <h2>To My Future Wife 💗</h2>
+
+        <div class="letter-text">
+
+Amar mishtu bou...amar shona,
+
+If you somehow made it all the way here...congratulations babyy...
+You officially unlocked the part of my heart that I don't show
+to everyone hehehe...only u have the key to my heart my dear wife...
+
+I don't even know where to begin becuz there are so many
+things I want to tell you babyy...
+
+You have become such a beautiful part of my life...Your voice...
+your smile...the way you talk to me...the little things you do...
+even the random moments when you don't realize how adorable
+you are... somehow...all of them stay in my mind my cutu chello...
+
+Sometimes I imagine what our future could look like...
+
+Not some perfect movie like future...actually i want us to be okjaanu typo but anyways hehehe...
+
+Just us...only us baby...and maybe..a little puppy..hehe what do u think?
+
+Growing older together....
+Laughing at stupid things...
+Supporting each other when life gets difficult...
+Celebrating every little achievement....
+Having random arguments over absolutely nothing and then
+laughing about them later...
+And my dear...CONGTRATS FOR TOPPING ALL SUBS HEHEHE I'M SO PROUD OF YOU...I'M SO HAPPY...
+THAT'S WHY THIS GIFT IS FOR MY FUTURE WIFE..WHAT DO U SAY? U R MY FUTURE WIFE NA MISTU BOU?
+oki back to the topic..ahem..heheh MWUAHHHHHHHHHHHHH
+
+And honestly...
+
+When I think about the future...I don't just want memories
+with you....
+
+I want a LIFE with you SMARAKLIPI!!!
+
+Someday...when we r older and the time is right... I want to
+stand beside you and ask you the biggest question of my life...
+
+I want to look at you and say...
+
+I will carry u in my heart to my grave sharu...
+
+Not because everything will always be perfect...
+but because I want to keep choosing you through all the
+imperfect days too....
+
+I want to see you chase your dreams....
+I want you to see me chase mine...
+I want us to become better people together....
+
+And maybe one day...this little virtual love letter won't be
+just something you read on a screen....
+
+Maybe it'll become a memory of the time when two people
+were young...hopelessly in love... and dreaming about a future
+together 💗
+
+I don't know exactly what the future will look like....
+
+But if life gives us the chance...
+
+I would love for you to be the person standing beside me
+when I finally get there....
+
+So here's my little promise chello..
+
+I'll keep loving you..annoying you...ragebaiting you..making you laugh..
+be freaky with you...talk dirty with you..supporting you..and reminding you just how special you are...
+
+And someday...
+
+I hope I get to call you my wife 💍💗
+
+Until then..let's keep creating our story...
+
+One memory....
+One smile...biggest one...
+One silly conversation....
+more i love you every time...
+
+You are incredibly precious to me...u mean everything to me..
+you are my blessing and the answer for my prayers..
+
+And if you ever forget how much you mean to me...
+
+come back to this little page...
+
+I'll leave this here for you...
+
+tumi jano na tumi amar kache koto ta special..Tumi shudhu amar bhalobasha nao..tumi amar shanti...amar happiness...ar amar favourite person..
+Tomar shathe kotha bollei amar puro din ta somehow better hoye jay...Tomar hashi...tomar cute little expressions...
+tomar voice shobkichui amar bhishon priyo...Ami jani na future e ki ache..but ekta jinish ami jani ami chai shei future e tumi thako...
+ Ekdin jokhon amra boro hobo...tokhono jeno ami tomake dekhe bolte pari...Ei meyetakei ami eto bochor dhore bhalobeshechi...💗 Tumi amar kache shotti khub precious..shona...
+Ami tomake onek onek bhalobashi...🌸💗
+
+
+Forever yours,
+Prajin M
+        </div>
+
+        <div class="signature">
+            — Your future husband (hopefully 😭💗)
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   CUSTOMIZE THESE TWO THINGS
+   ========================================== */
+
+const SECRET_PASSWORD = "171025"; 
+// Change this to whatever password you want.
+
+const PUZZLE_ANSWER = "love";
+// Puzzle answer is love.
+
+
+/* ==========================================
+   PASSWORD
+   ========================================== */
+
+function checkPassword() {
+
+    const input =
+        document.getElementById("password").value
+        .trim();
+
+    if(input === SECRET_PASSWORD) {
+
+        document
+            .getElementById("passwordScreen")
+            .classList.remove("active");
+
+        document
+            .getElementById("puzzleScreen")
+            .classList.add("active");
+
+        createHearts();
+
+    } else {
+
+        document
+            .getElementById("passwordError")
+            .style.display = "block";
+
+    }
+}
+
+
+/* ==========================================
+   PUZZLE
+   ========================================== */
+
+function solvePuzzle() {
+
+    const answer =
+        document
+        .getElementById("puzzleAnswer")
+        .value
+        .trim()
+        .toLowerCase();
+
+    if(answer === PUZZLE_ANSWER) {
+
+        document
+            .getElementById("puzzleScreen")
+            .classList.remove("active");
+
+        document
+            .getElementById("letterScreen")
+            .classList.add("active");
+
+        createHearts();
+
+    } else {
+
+        document
+            .getElementById("puzzleError")
+            .style.display = "block";
+
+    }
+}
+
+
+/* ==========================================
+   FLOATING HEARTS
+   ========================================== */
+
+function createHearts() {
+
+    for(let i = 0; i < 25; i++) {
+
+        setTimeout(() => {
+
+            const heart =
+                document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerHTML =
+                Math.random() > 0.5 ? "💗" : "💖";
+
+            heart.style.left =
+                Math.random() * 100 + "vw";
+
+            heart.style.bottom = "0px";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+
+        }, i * 100);
+
+    }
+}
+
+</script>
+
+
+</body>
+</html>
